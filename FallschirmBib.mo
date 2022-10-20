@@ -1,18 +1,18 @@
-//Version 8
+//Version 9
 package FallschirmBibliothek
   model Fallschirmsprung
   //Konstanten
-    import Modelica.Constants.g_n;  //Durchschnittliche Beschleunigung aus der Erde basierend auf der Gravitationskraft der Erde
-    constant Modelica.Units.SI.Acceleration g_earth = -g_n; //Beschleunigung der Erde mit Bezugssystem
+    import Modelica.Constants.G;  //Newton'sche Gravitationskonstante
   //Parameter
-    parameter Modelica.Units.SI.Force F_g = person.mass * g_earth; //resultierende Graft durch die Gravitation des Planeten!
   //Variablen
     Modelica.Units.SI.Force F_friction; //Resultierente Kraft durch Widerstand bei Bewegung durch Umgebungsgas!
+    Modelica.Units.SI.Force F_g; //resultierende Graft durch die Gravitation des Planeten!
   //Klassen
     FallschirmBibliothek.Person person(name="Gary", mass = 85, position(start=flugzeug.height), area_front = 1.0, cW = 0.78);
     FallschirmBibliothek.Flugzeug flugzeug(height = 2000);
     FallschirmBibliothek.Umgebung luft(h=person.position);
     FallschirmBibliothek.Fallschirm fallschirm(area_open = 5.0, area_closed = person.area_front, cW_closed = person.cW);
+    FallschirmBibliothek.Planet erde(name= "Erde", mass=5.972e24, radius=6371e3);
   //Modelica-Block
   
   equation
@@ -23,7 +23,8 @@ package FallschirmBibliothek
     F_friction = 0.5 * fallschirm.cW * fallschirm.area* luft.rho * person.velocity^2;
     fallschirm.reisleine_gezogen = true;
   end if;
-  person.acceleration * person.mass = F_g + F_friction;
+  person.acceleration * person.mass = -F_g + F_friction;
+  F_g = G * (((erde.mass*person.mass)/(erde.radius+person.position)^2));
   
   algorithm
     when person.position < 0 then
@@ -112,6 +113,17 @@ package FallschirmBibliothek
     area = damper_area.y;
     cW = damper_cW.y;
 end Fallschirm;
+
+  class Planet
+  //Konstanten
+  //Parameter
+    parameter String name = "Erde" "Name des Planeten";
+    parameter Modelica.Units.SI.Mass mass "Masse des Planeten";
+    parameter Modelica.Units.SI.Length radius "Radius des Planeten";
+  //Variablen
+  //Klassen
+  //Modelica-Blöcke
+  end Planet;
 
 annotation(uses(Modelica(version="4.0.0")));
 end FallschirmBibliothek;
