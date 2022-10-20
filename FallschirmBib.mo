@@ -1,22 +1,27 @@
-//Version 5
+//Version 6
 package FallschirmBibliothek
   model Fallschirmsprung
   //Konstanten
     import Modelica.Constants.g_n;  //Durchschnittliche Beschleunigung aus der Erde basierend auf der Gravitationskraft der Erde
     constant Modelica.Units.SI.Acceleration g_earth = -g_n; //Beschleunigung der Erde mit Bezugssystem
   //Parameter
-    parameter Modelica.Units.SI.Force F_g = person.mass * g_earth;        //resultierende Graft durch die Gravitation des Planeten!
+    parameter Modelica.Units.SI.Force F_g = person.mass * g_earth; //resultierende Graft durch die Gravitation des Planeten!
   //Variablen
     Modelica.Units.SI.Force F_friction; //Resultierente Kraft durch Widerstand bei Bewegung durch Umgebungsgas!
   //Klassen
     FallschirmBibliothek.Person person(name="Gary", mass = 85, position(start=flugzeug.height), area_front = 1.0, cW = 0.78);
     FallschirmBibliothek.Flugzeug flugzeug(height = 2000);
     FallschirmBibliothek.Umgebung luft(rho=1.225);
+    FallschirmBibliothek.Fallschirm fallschirm(area_open = 5.0, cW = 1.33);
   //Modelica-Blöcke
   
   
   equation
-  F_friction = 0.5 * person.cW * person.area_front * luft.rho * person.velocity^2;
+  if person.position > 500 then
+    F_friction = 0.5 * person.cW * person.area_front * luft.rho * person.velocity^2;
+  else
+    F_friction = 0.5 * fallschirm.cW * fallschirm.area_open* luft.rho * person.velocity^2;
+  end if;
   person.acceleration * person.mass = F_g + F_friction;
   
   algorithm
@@ -57,6 +62,17 @@ package FallschirmBibliothek
   class Umgebung
     parameter Modelica.Units.SI.Density rho "Dichte des Umgebungsgases";
   end Umgebung;
+
+  class Fallschirm
+  //Konstanten
+  //Parameter
+    parameter Modelica.Units.SI.Area area_open = 5 "Projektionsfläche eines geöffneten Fallschirms";
+    parameter Real cW = 1.33 "Strömungswiderstandskoeffizient eines geööfneten Fallschirms";
+  //Variablen
+  //Klassen
+  //Modelica-Blöcke
+
+  end Fallschirm;
 
 annotation(uses(Modelica(version="4.0.0")));
 end FallschirmBibliothek;
