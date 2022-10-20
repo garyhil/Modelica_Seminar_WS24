@@ -1,4 +1,4 @@
-//Version 7
+//Version 8
 package FallschirmBibliothek
   model Fallschirmsprung
   //Konstanten
@@ -11,7 +11,7 @@ package FallschirmBibliothek
   //Klassen
     FallschirmBibliothek.Person person(name="Gary", mass = 85, position(start=flugzeug.height), area_front = 1.0, cW = 0.78);
     FallschirmBibliothek.Flugzeug flugzeug(height = 2000);
-    FallschirmBibliothek.Umgebung luft(rho=1.225);
+    FallschirmBibliothek.Umgebung luft(h=person.position);
     FallschirmBibliothek.Fallschirm fallschirm(area_open = 5.0, area_closed = person.area_front, cW_closed = person.cW);
   //Modelica-Block
   
@@ -61,7 +61,21 @@ package FallschirmBibliothek
   end Flugzeug;
 
   class Umgebung
-    parameter Modelica.Units.SI.Density rho "Dichte des Umgebungsgases";
+    constant  Real R = Modelica.Constants.R;      //Universelle Gaskonstante
+    constant  Modelica.Units.SI.AbsolutePressure p_0 = 101325; //Luftdruck auf Meereshöhe
+    
+    parameter  Modelica.Units.SI.MolarMass M = 0.028949 "Molare Masse des Gases";
+    parameter  Modelica.Units.SI.Height H_0 = 7800 "Skalenhöhe im erdnahen Bereich";
+    
+    Modelica.Units.SI.Density rho "Dichte des Umgebungsgases";
+    Modelica.Units.SI.Temperature T "Temperatur der Umgebungsluft";
+    Modelica.Units.SI.AbsolutePressure  p "Luftdruck der Umgebungsluft";
+    Modelica.Units.SI.Height h "aktuelle Höhe über dem Meeresspiegel";
+    
+  equation 
+    rho = p * M/(T*R);
+    T = 294.15 - 7.5/1000*h;
+    p = p_0 * exp(-h/H_0);
   end Umgebung;
 
   class Fallschirm
