@@ -1,4 +1,4 @@
-//Version 3
+//Version 4
 package FallschirmBibliothek
   model Fallschirmsprung
   //Konstanten
@@ -11,13 +11,19 @@ package FallschirmBibliothek
     FallschirmBibliothek.Flugzeug flugzeug(height = 2000);
   //Modelica-Blöcke
   
+  
   equation
   person.acceleration * person.mass = person.mass * g_earth;
   
+  algorithm
+    when person.position < 0 then
+      terminate("The person landed!");
+    end when;
   end Fallschirmsprung;
 
   class Person
   //Konstanten
+    import Modelica.Constants.inf;
   //Parameter
     parameter Modelica.Units.SI.Mass mass = 80;
     parameter String name = "Max MustermPerson";
