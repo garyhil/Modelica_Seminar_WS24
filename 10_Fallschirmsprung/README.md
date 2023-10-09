@@ -53,25 +53,4 @@ Finally, in the Fallschirmsprung8 model, the luft object has been updated to use
 
 ## Detail-Level 9
 In this version of the project, the acceleration of the skydiver is calculated using the Newtonian Law of Gravitation, which takes into account the distance of the skydiver from the center of Earth's mass. However, upon comparing the simulation results between Detail-Level 8 and 9, it has been found that this extra information does not significantly improve the accuracy of the results. This serves as a reminder that not every single detail needs to be modeled, and one should consider the potential benefits of any changes to the model before implementing them.
-## Badges
-
-Add badges from somewhere like: [shields.io](https://shields.io/)
-
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
-[![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
-
-
-## Contributing
-
-Contributions are always welcome!
-
-See `contributing.md` for ways to get started.
-
-Please adhere to this project's `code of conduct`.
-
-
-## Authors
-
-- [@garyhil](https://www.github.com/garyhil)
 
