@@ -16,7 +16,9 @@
   Modelica.Units.SI.Pressure p "Druck am Boden des Tanks";
 equation
   V = h*A_T;
-  c = if noEvent(h >= 0) then sqrt(2*g*h) else 0;
+  //c = if noEvent(h >= 0) then sqrt(2*g*h) else 0;
+  c = smooth(0, if h >= 0 then sqrt(2*g*h) else 0);
+  //c = sqrt(2*g*h);
   p = p_amb + rho_W*g*h + 0.5*rho_W*c^2;
   m = c*A_o*rho_W;
   der(V) = -m/rho_W;
