@@ -197,7 +197,7 @@
       Modelica.Units.SI.Force F_friction;
       //Resultierente Kraft durch Widerstand bei Bewegung durch Umgebungsgas!
       //Klassen
-      FallschirmBibliothek5.Person person(name = "Harald", mass = 85, position(start = flugzeug.height), area_front = 1.0, cW = 0.78);
+      FallschirmBibliothek5.Person person(name = "Harald", mass = 85, position(start = flugzeug.height), area_front = 0.7, cW = 0.78);
       FallschirmBibliothek5.Flugzeug flugzeug(height = 2000);
       FallschirmBibliothek5.Umgebung luft(rho = 1.225);
       //Modelica-Blöcke
