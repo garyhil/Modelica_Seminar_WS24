@@ -6,6 +6,11 @@ package Test
         Modelica.Units.SI.Velocity      v;
         Modelica.Units.SI.Distance      s;
 
+    equation
+        der(v) = a;
+        der(s) = v;
+        m * a = m * -9.81;
+
     end Gewicht;
 
 end Test;
