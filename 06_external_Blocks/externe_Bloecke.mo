@@ -4,8 +4,13 @@
       Placement(visible = true, transformation(origin = {-70, 0}, extent = {{-20, -80}, {0, -60}}, rotation = 0)));
     Modelica.Electrical.Machines.BasicMachines.DCMachines.DC_PermanentMagnet dcpm(IaNominal = dcpmData.IaNominal, Jr = dcpmData.Jr, Js = dcpmData.Js, La = dcpmData.La, Ra = dcpmData.Ra, TaNominal = dcpmData.TaNominal, TaOperational = 293.15, TaRef = dcpmData.TaRef, VaNominal = dcpmData.VaNominal, alpha20a = dcpmData.alpha20a, brushParameters = dcpmData.brushParameters, coreParameters = dcpmData.coreParameters, frictionParameters = dcpmData.frictionParameters, ia(fixed = true), phiMechanical(fixed = true), strayLoadParameters = dcpmData.strayLoadParameters, useSupport = false, wMechanical(fixed = true), wNominal = dcpmData.wNominal) annotation(
       Placement(visible = true, transformation(origin = {-66, 0}, extent = {{-20, -50}, {0, -30}}, rotation = 0)));
+    
+    
     Modelica.Electrical.Analog.Basic.Ground ground annotation(
       Placement(visible = true, transformation(origin = {-112, -4}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
+    
+    
+    
     Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J = 50) annotation(
       Placement(visible = true, transformation(origin = {0, 0}, extent = {{40, -50}, {60, -30}}, rotation = 0)));
     Modelica.Mechanics.Rotational.Sources.TorqueStep loadTorqueStep(offsetTorque = 0, startTime = 1, stepTorque = 200, useSupport = false) annotation(

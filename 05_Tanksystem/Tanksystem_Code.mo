@@ -33,7 +33,12 @@ m2 = c2 * A2_out * rho;
 der(V1) = -m1/rho;
 der(V2) = -m2/rho;
 der(V1) + der(V2) = 0;
+//c1 = sqrt(2*g*(l1-l2));
 
+//when l1-l2<0 then
+//  c1 = 0;
+//end when;
+//c1 = if l1-l2>=0 then sqrt(2*g*(l1-l2)) else 0;
 c1 = if noEvent(l1-l2>=0) then sqrt(2*g*(l1-l2)) else 0;
 
 annotation(
