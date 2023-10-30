@@ -21,7 +21,7 @@
       //Konstanten
       //Parameter
       parameter Modelica.Units.SI.Mass mass = 80;
-      parameter String name = "Max MustermPerson";
+      parameter String name = "Max MusterPerson";
       //Variablen
       Modelica.Units.SI.Acceleration acceleration;
       //Beschleunigung (des Schwerpunktes) der Person
@@ -140,11 +140,16 @@
       FallschirmBibliothek4.Flugzeug flugzeug(height = 2000);
       //Modelica-Blöcke
     equation
-      person.acceleration * person.mass = person.mass * g_earth;
-    algorithm
-      when person.position < 0 then
-        terminate("The person landed!");
+      if noEvent(person.position > 0) then
+        person.acceleration * person.mass = person.mass * g_earth;
+      else
+        person.acceleration = 0;
+      end if;
+      
+      when time > 0 and person.acceleration == 0 then
+        reinit(person.velocity, 0);
       end when;
+    
       annotation(
         experiment(StartTime = 0, StopTime = 150, Tolerance = 1e-6, Interval = 0.01));
     end Fallschirmsprung4;
@@ -203,10 +208,14 @@
       //Modelica-Blöcke
     equation
       F_friction = 0.5 * person.cW * person.area_front * luft.rho * person.velocity ^ 2;
-      person.acceleration * person.mass = F_g + F_friction;
-    algorithm
-      when person.position < 0 then
-        terminate("The person landed!");
+      if noEvent(person.position > 0) then
+        person.acceleration * person.mass = person.mass * g_earth;
+      else
+        person.acceleration = 0;
+      end if;
+      
+      when time > 0 and person.acceleration == 0 then
+        reinit(person.velocity, 0);
       end when;
       annotation(
         experiment(StartTime = 0, StopTime = 150, Tolerance = 1e-06, Interval = 0.01));
@@ -218,7 +227,7 @@
       //Parameter
       parameter Modelica.Units.SI.Mass mass = 80 "Masse der Person";
       parameter String name = "Max MustermPerson" "Name der Person";
-      parameter Modelica.Units.SI.Area area_front = 1 "prokizierte Fläche der Person bei Frontalansicht";
+      parameter Modelica.Units.SI.Area area_front = 1 "projizierte Fläche der Person bei Frontalansicht";
       parameter Real cW = 0.78 "strömungswiderstand einer Person bei frontaler Angriffsfäche";
       //Variablen
       Modelica.Units.SI.Position position;
@@ -277,10 +286,14 @@
       else
         F_friction = 0.5 * fallschirm.cW * fallschirm.area_open * luft.rho * person.velocity ^ 2;
       end if;
-      person.acceleration * person.mass = F_g + F_friction;
-    algorithm
-      when person.position < 0 then
-        terminate("The person landed!");
+      if noEvent(person.position > 0) then
+        person.acceleration * person.mass = F_g + F_friction;
+      else
+        person.acceleration = 0;
+      end if;
+      
+      when time > 0 and person.acceleration == 0 and person.position < 1.0 then
+        reinit(person.velocity, 0);
       end when;
       annotation(
         experiment(StartTime = 0, StopTime = 150, Tolerance = 1e-06, Interval = 0.01));
@@ -363,10 +376,14 @@
         F_friction = 0.5 * fallschirm.cW * fallschirm.area * luft.rho * person.velocity ^ 2;
         fallschirm.reisleine_gezogen = true;
       end if;
-      person.acceleration * person.mass = F_g + F_friction;
-    algorithm
-      when person.position < 0 then
-        terminate("The person landed!");
+      if noEvent(person.position > 0) then
+        person.acceleration * person.mass = F_g + F_friction;
+      else
+        person.acceleration = 0;
+      end if;
+      
+      when time > 0 and person.acceleration == 0 and person.position < 1.0 then
+        reinit(person.velocity, 0);
       end when;
       annotation(
         experiment(StartTime = 0, StopTime = 150, Tolerance = 1e-06, Interval = 0.01));
@@ -474,10 +491,14 @@
         F_friction = 0.5 * fallschirm.cW * fallschirm.area * luft.rho * person.velocity ^ 2;
         fallschirm.reisleine_gezogen = true;
       end if;
-      person.acceleration * person.mass = F_g + F_friction;
-    algorithm
-      when person.position < 0 then
-        terminate("The person landed!");
+      if noEvent(person.position > 0) then
+        person.acceleration * person.mass = F_g + F_friction;
+      else
+        person.acceleration = 0;
+      end if;
+      
+      when time > 0 and person.acceleration == 0 and person.position < 1.0 then
+        reinit(person.velocity, 0);
       end when;
       annotation(
         experiment(StartTime = 0, StopTime = 150, Tolerance = 1e-6, Interval = 0.01));
@@ -596,11 +617,15 @@
         F_friction = 0.5 * fallschirm.cW * fallschirm.area * luft.rho * person.velocity ^ 2;
         fallschirm.reisleine_gezogen = true;
       end if;
-      person.acceleration * person.mass = (-F_g) + F_friction;
       F_g = G * (erde.mass * person.mass / (erde.radius + person.position) ^ 2);
-    algorithm
-      when person.position < 0 then
-        terminate("The person landed!");
+      if noEvent(person.position > 0) then
+        person.acceleration * person.mass = (-F_g) + F_friction;
+      else
+        person.acceleration = 0;
+      end if;
+      
+      when time > 0 and person.acceleration == 0 and person.position < 1.0 then
+        reinit(person.velocity, 0);
       end when;
       annotation(
         experiment(StartTime = 0, StopTime = 150, Tolerance = 1e-06, Interval = 0.01));
