@@ -15,4 +15,6 @@ equation
     done = h<-eps;
     reinit(v, -e*(if h<-eps then 0 else pre(v)));
   end when;
+annotation(
+    experiment(StartTime = 0, StopTime = 5, Tolerance = 1e-6, Interval = 0.0002));
 end BouncingBall;

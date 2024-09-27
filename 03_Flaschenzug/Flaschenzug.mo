@@ -25,7 +25,7 @@
       Line(points = {{60, -76}, {38, -76}, {38, -48}}, color = {0, 127, 0}));
     annotation(
       Diagram(graphics = {Text(origin = {-83, 86}, extent = {{-13, 16}, {13, -16}}, textString = "Fall 01")}),
-      experiment(StartTime = 0, StopTime = 10, Tolerance = 1e-6, Interval = 0.002));
+      experiment(StartTime = 0, StopTime = 10, Tolerance = 1e-06, Interval = 0.002));
   end Flaschenzug_Fall01;
 
   model Flaschenzug_Fall02
