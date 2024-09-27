@@ -1,13 +1,15 @@
 ﻿model FMDS_Code
 
-constant Real   g = -9.81 "Erdbeschleunigung";
-parameter Real  m = 1.0   "Masse in kg";
-parameter Real  c = -50   "Fedekonstante in N/m";
-parameter Real  d = -0.5  "Dämpferkonstante in Ns/m";
+import Modelica.Units.SI;
 
-Real x  "Auslenkung der Masse aus der Ruheposition";
-Real v  "Geschwindigkeit der Masse";
-Real a  "Beschleunigung der Masse";
+constant  SI.Acceleration                 g = -9.81 "Erdbeschleunigung";
+parameter SI.Mass                         m = 1.0   "Masse in kg";
+parameter SI.TranslationalSpringConstant  c = -50   "Fedekonstante in N/m";
+parameter SI.TranslationalDampingConstant d = -0.5  "Dämpferkonstante in Ns/m";
+
+SI.Length       x  "Auslenkung der Masse aus der Ruheposition";
+SI.Velocity     v  "Geschwindigkeit der Masse";
+SI.Acceleration a  "Beschleunigung der Masse";
 
 equation
 der(x) = v;
