@@ -12,7 +12,7 @@
       FallschirmBibliothek1.Person person(name = "Harald", mass = 85);
       //Modelica-Blöcke
     equation
-      person.acceleration * person.mass = person.mass * g_n;
+      person.acceleration*person.mass = person.mass*g_n;
       annotation(
         experiment(StartTime = 0, StopTime = 150, Tolerance = 1e-06, Interval = 0.01));
     end Fallschirmsprung1;
@@ -45,7 +45,7 @@
       FallschirmBibliothek2.Person person(name = "Harald", mass = 85);
       //Modelica-Blöcke
     equation
-      person.acceleration * person.mass = person.mass * g_n;
+      person.acceleration*person.mass = person.mass*g_n;
       annotation(
         experiment(StartTime = 0, StopTime = 150, Tolerance = 1e-06, Interval = 0.01));
     end Fallschirmsprung2;
@@ -88,7 +88,7 @@
       FallschirmBibliothek3.Flugzeug flugzeug(height = 2000);
       //Modelica-Blöcke
     equation
-      person.acceleration * person.mass = person.mass * g_earth;
+      person.acceleration*person.mass = person.mass*g_earth;
       annotation(
         experiment(StartTime = 0, StopTime = 150, Tolerance = 1e-6, Interval = 0.01));
     end Fallschirmsprung3;
@@ -141,15 +141,13 @@
       //Modelica-Blöcke
     equation
       if noEvent(person.position > 0) then
-        person.acceleration * person.mass = person.mass * g_earth;
+        person.acceleration*person.mass = person.mass*g_earth;
       else
         person.acceleration = 0;
       end if;
-      
       when time > 0 and person.acceleration == 0 then
         reinit(person.velocity, 0);
       end when;
-    
       annotation(
         experiment(StartTime = 0, StopTime = 150, Tolerance = 1e-6, Interval = 0.01));
     end Fallschirmsprung4;
@@ -196,7 +194,7 @@
       constant Modelica.Units.SI.Acceleration g_earth = -g_n;
       //Beschleunigung der Erde mit Bezugssystem
       //Parameter
-      parameter Modelica.Units.SI.Force F_g = person.mass * g_earth;
+      parameter Modelica.Units.SI.Force F_g = person.mass*g_earth;
       //resultierende Graft durch die Gravitation des Planeten!
       //Variablen
       Modelica.Units.SI.Force F_friction;
@@ -207,13 +205,12 @@
       FallschirmBibliothek5.Umgebung luft(rho = 1.225);
       //Modelica-Blöcke
     equation
-      F_friction = 0.5 * person.cW * person.area_front * luft.rho * person.velocity ^ 2;
+      F_friction = 0.5*person.cW*person.area_front*luft.rho*person.velocity^2;
       if noEvent(person.position > 0) then
-        person.acceleration * person.mass = person.mass * g_earth;
+        person.acceleration*person.mass = person.mass*g_earth;
       else
         person.acceleration = 0;
       end if;
-      
       when time > 0 and person.acceleration == 0 then
         reinit(person.velocity, 0);
       end when;
@@ -269,7 +266,7 @@
       constant Modelica.Units.SI.Acceleration g_earth = -g_n;
       //Beschleunigung der Erde mit Bezugssystem
       //Parameter
-      parameter Modelica.Units.SI.Force F_g = person.mass * g_earth;
+      parameter Modelica.Units.SI.Force F_g = person.mass*g_earth;
       //resultierende Graft durch die Gravitation des Planeten!
       //Variablen
       Modelica.Units.SI.Force F_friction;
@@ -282,16 +279,15 @@
       //Modelica-Blöcke
     equation
       if person.position > 500 then
-        F_friction = 0.5 * person.cW * person.area_front * luft.rho * person.velocity ^ 2;
+        F_friction = 0.5*person.cW*person.area_front*luft.rho*person.velocity^2;
       else
-        F_friction = 0.5 * fallschirm.cW * fallschirm.area_open * luft.rho * person.velocity ^ 2;
+        F_friction = 0.5*fallschirm.cW*fallschirm.area_open*luft.rho*person.velocity^2;
       end if;
       if noEvent(person.position > 0) then
-        person.acceleration * person.mass = F_g + F_friction;
+        person.acceleration*person.mass = F_g + F_friction;
       else
         person.acceleration = 0;
       end if;
-      
       when time > 0 and person.acceleration == 0 and person.position < 1.0 then
         reinit(person.velocity, 0);
       end when;
@@ -357,7 +353,7 @@
       constant Modelica.Units.SI.Acceleration g_earth = -g_n;
       //Beschleunigung der Erde mit Bezugssystem
       //Parameter
-      parameter Modelica.Units.SI.Force F_g = person.mass * g_earth;
+      parameter Modelica.Units.SI.Force F_g = person.mass*g_earth;
       //resultierende Graft durch die Gravitation des Planeten!
       //Variablen
       Modelica.Units.SI.Force F_friction;
@@ -370,18 +366,17 @@
       //Modelica-Block
     equation
       if person.position > 500 then
-        F_friction = 0.5 * person.cW * person.area_front * luft.rho * person.velocity ^ 2;
+        F_friction = 0.5*person.cW*person.area_front*luft.rho*person.velocity^2;
         fallschirm.reisleine_gezogen = false;
       else
-        F_friction = 0.5 * fallschirm.cW * fallschirm.area * luft.rho * person.velocity ^ 2;
+        F_friction = 0.5*fallschirm.cW*fallschirm.area*luft.rho*person.velocity^2;
         fallschirm.reisleine_gezogen = true;
       end if;
       if noEvent(person.position > 0) then
-        person.acceleration * person.mass = F_g + F_friction;
+        person.acceleration*person.mass = F_g + F_friction;
       else
         person.acceleration = 0;
       end if;
-      
       when time > 0 and person.acceleration == 0 and person.position < 1.0 then
         reinit(person.velocity, 0);
       end when;
@@ -452,12 +447,13 @@
         damper_area.u = area_closed;
       else
         damper_cW.u = cW_open;
-        damper_area.u = (area_open - area_closed) / (1 + exp(-(10 / opening_duration * (time - opening_time) - log((area_open - area_closed) ^ 2 / 2) - 1 / (area_open - area_closed)))) + area_closed;
+        damper_area.u = (area_open - area_closed)/(1 + exp(-(10/opening_duration*(time - opening_time) - log((area_open - area_closed)^2/2) - 1/(area_open - area_closed)))) + area_closed;
       end if;
       area = damper_area.y;
       cW = damper_cW.y;
-    annotation(
-        experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-6, Interval = 0.002));end Fallschirm;
+      annotation(
+        experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-6, Interval = 0.002));
+    end Fallschirm;
     annotation(
       uses(Modelica(version = "4.0.0")));
   end FallschirmBibliothek7;
@@ -472,7 +468,7 @@
       constant Modelica.Units.SI.Acceleration g_earth = -g_n;
       //Beschleunigung der Erde mit Bezugssystem
       //Parameter
-      parameter Modelica.Units.SI.Force F_g = person.mass * g_earth;
+      parameter Modelica.Units.SI.Force F_g = person.mass*g_earth;
       //resultierende Graft durch die Gravitation des Planeten!
       //Variablen
       Modelica.Units.SI.Force F_friction;
@@ -485,23 +481,22 @@
       //Modelica-Block
     equation
       if person.position > 500 then
-        F_friction = 0.5 * person.cW * person.area_front * luft.rho * person.velocity ^ 2;
+        F_friction = 0.5*person.cW*person.area_front*luft.rho*person.velocity^2;
         fallschirm.reisleine_gezogen = false;
       else
-        F_friction = 0.5 * fallschirm.cW * fallschirm.area * luft.rho * person.velocity ^ 2;
+        F_friction = 0.5*fallschirm.cW*fallschirm.area*luft.rho*person.velocity^2;
         fallschirm.reisleine_gezogen = true;
       end if;
       if noEvent(person.position > 0) then
-        person.acceleration * person.mass = F_g + F_friction;
+        person.acceleration*person.mass = F_g + F_friction;
       else
         person.acceleration = 0;
       end if;
-      
       when time > 0 and person.acceleration == 0 and person.position < 1.0 then
         reinit(person.velocity, 0);
       end when;
       annotation(
-        experiment(StartTime = 0, StopTime = 150, Tolerance = 1e-6, Interval = 0.01));
+        experiment(StartTime = 0, StopTime = 150, Tolerance = 1e-06, Interval = 0.01));
     end Fallschirmsprung8;
 
     class Person
@@ -547,9 +542,9 @@
       Modelica.Units.SI.AbsolutePressure p "Luftdruck der Umgebungsluft";
       Modelica.Units.SI.Height h "aktuelle Höhe über dem Meeresspiegel";
     equation
-      rho = p * M / (T * R);
-      T = 294.15 - 7.5 / 1000 * h;
-      p = p_0 * exp(-h / H_0);
+      rho = p*M/(T*R);
+      T = 294.15 - 7.5/1000*h;
+      p = p_0*exp(-h/H_0);
     end Umgebung;
 
     class Fallschirm
@@ -580,7 +575,7 @@
         damper_area.u = area_closed;
       else
         damper_cW.u = cW_open;
-        damper_area.u = (area_open - area_closed) / (1 + exp(-(10 / opening_duration * (time - opening_time) - log((area_open - area_closed) ^ 2 / 2) - 1 / (area_open - area_closed)))) + area_closed;
+        damper_area.u = (area_open - area_closed)/(1 + exp(-(10/opening_duration*(time - opening_time) - log((area_open - area_closed)^2/2) - 1/(area_open - area_closed)))) + area_closed;
       end if;
       area = damper_area.y;
       cW = damper_cW.y;
@@ -611,19 +606,18 @@
       //Modelica-Block
     equation
       if person.position > 500 then
-        F_friction = 0.5 * person.cW * person.area_front * luft.rho * person.velocity ^ 2;
+        F_friction = 0.5*person.cW*person.area_front*luft.rho*person.velocity^2;
         fallschirm.reisleine_gezogen = false;
       else
-        F_friction = 0.5 * fallschirm.cW * fallschirm.area * luft.rho * person.velocity ^ 2;
+        F_friction = 0.5*fallschirm.cW*fallschirm.area*luft.rho*person.velocity^2;
         fallschirm.reisleine_gezogen = true;
       end if;
-      F_g = G * (erde.mass * person.mass / (erde.radius + person.position) ^ 2);
+      F_g = G*(erde.mass*person.mass/(erde.radius + person.position)^2);
       if noEvent(person.position > 0) then
-        person.acceleration * person.mass = (-F_g) + F_friction;
+        person.acceleration*person.mass = (-F_g) + F_friction;
       else
         person.acceleration = 0;
       end if;
-      
       when time > 0 and person.acceleration == 0 and person.position < 1.0 then
         reinit(person.velocity, 0);
       end when;
@@ -674,9 +668,9 @@
       Modelica.Units.SI.AbsolutePressure p "Luftdruck der Umgebungsluft";
       Modelica.Units.SI.Height h "aktuelle Höhe über dem Meeresspiegel";
     equation
-      rho = p * M / (T * R);
-      T = 294.15 - 7.5 / 1000 * h;
-      p = p_0 * exp(-h / H_0);
+      rho = p*M/(T*R);
+      T = 294.15 - 7.5/1000*h;
+      p = p_0*exp(-h/H_0);
     end Umgebung;
 
     class Fallschirm
@@ -707,7 +701,7 @@
         damper_area.u = area_closed;
       else
         damper_cW.u = cW_open;
-        damper_area.u = (area_open - area_closed) / (1 + exp(-(10 / opening_duration * (time - opening_time) - log((area_open - area_closed) ^ 2 / 2) - 1 / (area_open - area_closed)))) + area_closed;
+        damper_area.u = (area_open - area_closed)/(1 + exp(-(10/opening_duration*(time - opening_time) - log((area_open - area_closed)^2/2) - 1/(area_open - area_closed)))) + area_closed;
       end if;
       area = damper_area.y;
       cW = damper_cW.y;

@@ -3,7 +3,7 @@
     Flaschenzug.Components.Decke decke annotation(
       Placement(visible = true, transformation(origin = {1, 79}, extent = {{-75, -15}, {75, 15}}, rotation = 0)));
     Flaschenzug.Components.Masse masse annotation(
-      Placement(visible = true, transformation(origin = {-34, -74}, extent = {{-24, -24}, {24, 24}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-36, -58}, extent = {{-24, -24}, {24, 24}}, rotation = 0)));
     Flaschenzug.Components.Seil seil annotation(
       Placement(visible = true, transformation(origin = {-34.8, -2}, extent = {{-9.2, -46}, {9.2, 46}}, rotation = 0)));
     Flaschenzug.Components.Seil seil1 annotation(
@@ -14,7 +14,7 @@
       Placement(visible = true, transformation(origin = {59, -77}, extent = {{-21, -21}, {21, 21}}, rotation = 0)));
   equation
     connect(masse.flange_a, seil.flange_u) annotation(
-      Line(points = {{-34, -65}, {-34, -54}, {-35, -54}, {-35, -41}}, color = {0, 127, 0}));
+      Line(points = {{-36, -49}, {-36, -54}, {-35, -54}, {-35, -41}}, color = {0, 127, 0}));
     connect(seil.flange_o, umlenkrolle.flange_l) annotation(
       Line(points = {{-35, 38}, {-35, 42}, {-14, 42}}, color = {0, 127, 0}));
     connect(umlenkrolle.flange_m, decke.flange_a) annotation(
