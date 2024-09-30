@@ -7,8 +7,8 @@
   parameter SI.Area                 A = 5.0             "Querschnittsfläche der Wand [m^2]";
   parameter SI.HeatCapacity         C1 = 500            "Wärmekapzität Medium 1 [W*s/K]";
   parameter SI.HeatCapacity         C2= 500             "Wärmekapzität Medium 2 [W*s/K]";
-            SI.Temperature          T1(start = 303.15)  "Temperature on Side 1 [K]";
-            SI.Temperature          T2(start = 283.15)  "Temperature on Side 2 [K]";
+            SI.Temperature          T1(start = 283.15)  "Temperature on Side 1 [K]";
+            SI.Temperature          T2(start = 303.15)  "Temperature on Side 2 [K]";
             SI.HeatFlowRate         dQ                  "Wärmestrom [W]";
 equation
   dQ = lambda/z*A*(T1 - T2);

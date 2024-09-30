@@ -97,7 +97,7 @@
       Placement(visible = true, transformation(origin = {38.2, -5}, extent = {{-10.2, -51}, {10.2, 51}}, rotation = 0)));
     Flaschenzug.Components.Umlenkrolle umlenkrolle annotation(
       Placement(visible = true, transformation(origin = {1, 41}, extent = {{-25, -25}, {25, 25}}, rotation = 0)));
-    Flaschenzug.Components.Hand hand(v = 10) annotation(
+    Flaschenzug.Components.Hand hand(v = -10) annotation(
       Placement(visible = true, transformation(origin = {59, -77}, extent = {{-21, -21}, {21, 21}}, rotation = 0)));
   equation
     connect(masse.flange_a, seil.flange_u) annotation(
@@ -126,7 +126,7 @@
       Placement(visible = true, transformation(origin = {38.2, -5}, extent = {{-10.2, -51}, {10.2, 51}}, rotation = 0)));
     Flaschenzug.Components.Umlenkrolle umlenkrolle annotation(
       Placement(visible = true, transformation(origin = {1, 41}, extent = {{-25, -25}, {25, 25}}, rotation = 0)));
-    Flaschenzug.Components.Hand hand(v = 5*time) annotation(
+    Flaschenzug.Components.Hand hand(v = -5*time) annotation(
       Placement(visible = true, transformation(origin = {59, -77}, extent = {{-21, -21}, {21, 21}}, rotation = 0)));
   equation
     connect(masse.flange_a, seil.flange_u) annotation(
@@ -213,7 +213,7 @@
       Placement(visible = true, transformation(origin = {38.2, -5}, extent = {{-10.2, -51}, {10.2, 51}}, rotation = 0)));
     Flaschenzug.Components.Umlenkrolle umlenkrolle annotation(
       Placement(visible = true, transformation(origin = {1, 41}, extent = {{-25, -25}, {25, 25}}, rotation = 0)));
-    Flaschenzug.Components.Hand hand(flange_a.f = 1) annotation(
+    Flaschenzug.Components.Hand hand(flange_a.f = -1) annotation(
       Placement(visible = true, transformation(origin = {59, -77}, extent = {{-21, -21}, {21, 21}}, rotation = 0)));
   equation
     connect(masse.flange_a, seil.flange_u) annotation(
@@ -242,7 +242,7 @@
       Placement(visible = true, transformation(origin = {38.2, -5}, extent = {{-10.2, -51}, {10.2, 51}}, rotation = 0)));
     Flaschenzug.Components.Umlenkrolle umlenkrolle annotation(
       Placement(visible = true, transformation(origin = {1, 41}, extent = {{-25, -25}, {25, 25}}, rotation = 0)));
-    Flaschenzug.Components.Hand hand(flange_a.f = 51) annotation(
+    Flaschenzug.Components.Hand hand(flange_a.f = -51) annotation(
       Placement(visible = true, transformation(origin = {59, -77}, extent = {{-21, -21}, {21, 21}}, rotation = 0)));
   equation
     connect(masse.flange_a, seil.flange_u) annotation(
